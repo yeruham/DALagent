@@ -28,7 +28,6 @@ class AgentsManager:
 
 
 
-
     def menu_agents(self):
 
         menu = ("To add new agent enter 1\n"
@@ -64,6 +63,7 @@ class AgentsManager:
 
         return agents
 
+
     def print_agents(self, agents):
         print()
         if not isinstance(agents, list) or len(agents) == 0:
@@ -72,6 +72,7 @@ class AgentsManager:
             if isinstance(agent, Agent):
                 print(agent)
         print()
+
 
     def insert_agent(self):
         name = input("Enter agent's name\n")
@@ -82,33 +83,40 @@ class AgentsManager:
         agent = Agent(code_name, name, location, status, missions_completed)
         self.DAL.insert_new_agent(agent)
 
+
     def update_agent(self, option):
 
+        agent_id = self.get_agent_id()
+        if agent_id > 0:
+            if option == '2':
+                location = input("Enter new location of agent\n")
+                self.DAL.update_location_by_id(location, agent_id)
+            elif option == '3':
+                status = input("Enter new status of agent\n")
+                self.DAL.update_status_by_id(status, agent_id)
+            elif option == '4':
+                missions_completed = input("Enter new num missions completed of agent\n")
+                self.DAL.update_missions_completed_by_id(missions_completed, agent_id)
+            else:
+                    pass
+
+
+    def get_agent_id(self):
+        id = -1
         code_name = input("Enter agent's code name\n")
         agents = self.DAL.select_agent_by_code_name(code_name)
         if not isinstance(agents, list) or len(agents) == 0 or not isinstance(agents[0], Agent):
             print("The agent's code name not exit")
-
         else:
             id = agents[0].id
-            if option == '2':
-                location = input("Enter new location of agent\n")
-                self.DAL.update_location_by_id(location, id)
-            elif option == '3':
-                status = input("Enter new status of agent\n")
-                self.DAL.update_status_by_id(status, id)
-            elif option == '4':
-                missions_completed = input("Enter new num missions completed of agent\n")
-                self.DAL.update_missions_completed_by_id(missions_completed, id)
-            else:
-                pass
+
+        return id
 
 
     def delete_agent(self):
-        pass
-
-
-
+        agent_id = self.get_agent_id()
+        if agent_id > 0:
+            self.DAL.delete_agent_by_id(agent_id)
 
 
 
