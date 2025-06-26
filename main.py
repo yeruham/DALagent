@@ -84,7 +84,25 @@ class AgentsManager:
 
     def update_agent(self, option):
 
-        pass
+        code_name = input("Enter agent's code name\n")
+        agents = self.DAL.select_agent_by_code_name(code_name)
+        if not isinstance(agents, list) or len(agents) == 0 or not isinstance(agents[0], Agent):
+            print("The agent's code name not exit")
+
+        else:
+            id = agents[0].id
+            if option == '2':
+                location = input("Enter new location of agent\n")
+                self.DAL.update_location_by_id(location, id)
+            elif option == '3':
+                status = input("Enter new status of agent\n")
+                self.DAL.update_status_by_id(status, id)
+            elif option == '4':
+                missions_completed = input("Enter new num missions completed of agent\n")
+                self.DAL.update_missions_completed_by_id(missions_completed, id)
+            else:
+                pass
+
 
     def delete_agent(self):
         pass
