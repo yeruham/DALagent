@@ -11,11 +11,11 @@ class DALagent:
         self.table = table
 
 
-    def select(self, query = ""):
+    def select(self, condition = ""):
         with mysql.connector.connect(host= self.host, user= self.user, password= self.password, database= self.database) as connection:
-            basic_query = f"SELECT * FROM {self.table}"
+            query = f"SELECT * FROM {self.table} {condition}"
             cursor = connection.cursor()
-            cursor.execute(basic_query + query)
+            cursor.execute(query)
             rows_agents = cursor.fetchall()
             return rows_agents
 
@@ -29,19 +29,20 @@ class DALagent:
             cursor.execute(query)
             connection.commit()
 
-    def delete(self, condition):
+
+    def delete(self, condition= ""):
         with mysql.connector.connect(host= self.host, user= self.user, password= self.password, database= self.database) as connection:
-            query = f"DELETE FROM {self.table} WHERE {condition}"
+            query = f"DELETE FROM {self.table} {condition}"
             cursor = connection.cursor()
             cursor.execute(query)
             connection.commit()
 
 
-    def update(self, update, condition):
+    def update(self, update, condition= ""):
         with mysql.connector.connect(host= self.host, user= self.user, password= self.password, database= self.database) as connection:
-            query = f"UPDATE {self.table} SET {update} WHERE {condition}"
+            query = f"UPDATE {self.table} SET {update} {condition}"
             cursor = connection.cursor()
-            cursor.execute()
+            cursor.execute(query)
             connection.commit()
 
 
