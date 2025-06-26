@@ -11,7 +11,7 @@ class DALagent:
         self.table = table
 
 
-    def select(self, query):
+    def select(self, query = ""):
         with mysql.connector.connect(host= self.host, user= self.user, password= self.password, database= self.database) as connection:
             basic_query = f"SELECT * FROM {self.table}"
             cursor = connection.cursor()
