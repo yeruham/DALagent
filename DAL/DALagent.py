@@ -67,17 +67,3 @@ class DALagent(DALagent):
         condition = f"WHERE id = '{id}'"
         return self.delete(condition)
 
-
-
-
-
-#
-# x = DALagent()
-# print(x.select_agents())
-# print(x.select_agent_by_id(1)[0])
-# print(x.select_agent_by_name("yeruham")[0])
-# print(x.select_agent_by_code_name("f")[0])
-# x.update_location_by_id("USA", 1)
-# x.update_status_by_id("ded", 1)
-# x.update_missions_completed_by_id(8, 5)
-# print(x.select_agent_by_id(5)[0])

@@ -44,10 +44,3 @@ class DALagent:
             cursor = connection.cursor()
             cursor.execute(query)
             connection.commit()
-
-
-
-
-# x = DALagent( host = "localhost", user = "root", password = "", database = "agentDB", table= "agents")
-# x.insert(("codeName", "realName", "location", "status", "missionsCompleted"), ("f", "or", "USA", "alive", "2"))
-# print(x.select(""))
