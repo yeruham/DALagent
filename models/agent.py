@@ -7,3 +7,9 @@ class Agent:
         self.status = status
         self.missions_completed = missions_completed
         self.id = id
+
+
+    def __str__(self):
+        return (f"agent id: {self.id}, name: {self.real_name}, code name: {self.code_name},"
+                f"location: {self.location}, status: {self.status},"
+                f" num missions completed: {self.missions_completed}")
